@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by NGUYEN on 6/7/2016.
  */
 public class ServiceGenerator {
-    public static final String BASE_URL = "http://puppy.kimhieu.me/wc-api/v3/";
+    public static final String BASE_URL = "http://lshxf6oyz-site.gtempurl.com/wp/wc-api/v3/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .addInterceptor(new BasicAuthInterceptor());
