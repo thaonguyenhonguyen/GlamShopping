@@ -16,7 +16,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
 
         imageButtonSignIn = (ImageButton) findViewById(R.id.imageButtonLogin);
         imageButtonSignInWithFB = (ImageButton) findViewById(R.id.imageButtonLoginWithFB);
