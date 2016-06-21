@@ -1,6 +1,5 @@
 package com.honguyenthaonguyen.glamshopping;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,13 +20,14 @@ import retrofit2.Response;
 /**
  * Created by Administrator on 11/06/2016.
  */
-public class FragmentCategory extends Fragment {
+public class FragmentCategory extends android.support.v4.app.Fragment {
     RecyclerView recyclerView;
     RecyclerView.Adapter recyclerViewAdapter;
     RecyclerView.LayoutManager recyclerViewLayoutManager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
     }
 
@@ -40,7 +40,7 @@ public class FragmentCategory extends Fragment {
         recyclerView = (RecyclerView) viewFragment.findViewById(R.id.recycler_view_category_list);
 
         // Create layout manager
-        recyclerViewLayoutManager = new LinearLayoutManager(this.getActivity());
+        recyclerViewLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
         // Get Data
         WooCommerceService service = ServiceGenerator.createService(WooCommerceService.class);
@@ -64,6 +64,8 @@ public class FragmentCategory extends Fragment {
 
         return viewFragment;
     }
+
+
 
     @Override
     public void onPause() {

@@ -1,47 +1,52 @@
 package com.honguyenthaonguyen.glamshopping.adapter;
 
-import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.honguyenthaonguyen.glamshopping.ProductDetailsActivity;
+import com.bumptech.glide.Glide;
 import com.honguyenthaonguyen.glamshopping.R;
 import com.honguyenthaonguyen.glamshopping.model.Product;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by NGUYEN on 6/7/2016.
  */
 public class ProductListAdapter extends RecyclerView.Adapter{
-    List<Product> mDataset;
 
-    public static final String PRODUCT_ID = "";
+    List<Product> mDataset;
+    public static int count;
+    public static ArrayList<Integer> PRODUCT_ID_LIST;
+
     public  ProductListAdapter(List<Product> mDataset){
         this.mDataset = mDataset;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView textViewProductName;
-        public TextView textViewProductNumberOfComment;
-        public TextView textViewProductDescription;
-        public ImageView imageViewProductImage;
-        public LinearLayout linearLayoutProductList;
+        public TextView textViewTenSanPham;
+        public TextView textViewNhaSanXuat;
+        public TextView textViewGiaSanPham;
+        public ImageView imageViewSanPham;
+        public ImageButton imageButtonAdd;
+        public CardView cardViewCellSanPham;
         public ViewHolder(View itemView)
         {
             super(itemView);
-            textViewProductName = (TextView) itemView.findViewById(R.id.text_product_name);
-            textViewProductNumberOfComment = (TextView) itemView.findViewById(R.id.textViewProductCommentCount);
-            textViewProductDescription = (TextView) itemView.findViewById(R.id.textViewProductDescription);
-            imageViewProductImage = (ImageView) itemView.findViewById(R.id.image_view);
-            linearLayoutProductList = (LinearLayout) itemView.findViewById(R.id.linear_product_cell);
+            textViewTenSanPham = (TextView) itemView.findViewById(R.id.textViewTenSanPham);
+            textViewNhaSanXuat = (TextView) itemView.findViewById(R.id.textViewNhaSanXuat);
+            textViewGiaSanPham = (TextView) itemView.findViewById(R.id.textViewGiaSanPham);
+            imageViewSanPham = (ImageView) itemView.findViewById(R.id.imageViewSanPham);
+            imageButtonAdd = (ImageButton) itemView.findViewById(R.id.imageButtonAdd);
+            cardViewCellSanPham = (CardView) itemView.findViewById(R.id.card_viewCellSanPham);
         }
     }
     @Override
@@ -54,25 +59,41 @@ public class ProductListAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        ((ViewHolder)holder).textViewProductName.setText(mDataset.get(position).getTitle());
 
-        ((ViewHolder)holder).textViewProductNumberOfComment.setText(String.valueOf(mDataset.get(position).getRatingCount()));
-        ((ViewHolder)holder).textViewProductDescription.setText(mDataset.get(position).getDescription());
-        Picasso.with(holder.itemView.getContext())
+        ((ViewHolder)holder).textViewTenSanPham.setText(mDataset.get(position).getTitle());
+        final String title = mDataset.get(position).getTitle();
+        ((ViewHolder)holder).textViewNhaSanXuat.setText(mDataset.get(position).getStatus());
+        ((ViewHolder)holder).textViewGiaSanPham.setText("$ "+mDataset.get(position).getPrice());
+//        Picasso.with(holder.itemView.getContext())
+//                .load(mDataset.get(position).getImages().get(0).getSrc())
+//                .into(((ViewHolder)holder).imageViewSanPham);
+        Glide.with(holder.itemView.getContext())
                 .load(mDataset.get(position).getImages().get(0).getSrc())
-                .into(((ViewHolder)holder).imageViewProductImage);
-        ((ViewHolder)holder).linearLayoutProductList.setOnClickListener(new View.OnClickListener() {
+                .into(((ViewHolder)holder).imageViewSanPham);
+        ((ViewHolder)holder).cardViewCellSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mh = new Intent(v.getContext(), ProductDetailsActivity.class);
-                mh.putExtra(PRODUCT_ID,mDataset.get(position).getId()+"");
-                v.getContext().startActivity(mh);
+                Toast.makeText(v.getContext(),title,Toast.LENGTH_LONG).show();
             }
         });
+        PRODUCT_ID_LIST = new ArrayList<>();
+        count = 0;
+        ((ViewHolder)holder).imageButtonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                count++;
+                PRODUCT_ID_LIST.add(mDataset.get(position).getId());
+            }
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
     }
+
+
 }
