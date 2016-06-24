@@ -1,6 +1,9 @@
 package com.honguyenthaonguyen.glamshopping.adapter;
 
-import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.honguyenthaonguyen.glamshopping.ProductListActivity;
+import com.bumptech.glide.Glide;
+import com.honguyenthaonguyen.glamshopping.FragmentProductList;
 import com.honguyenthaonguyen.glamshopping.R;
 import com.honguyenthaonguyen.glamshopping.model.ProductCategory;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,6 +24,8 @@ import java.util.List;
  */
 public class CategoryListAdapter extends RecyclerView.Adapter {
     List<ProductCategory> mDataset;
+    public FragmentManager fragmentManager;
+    public FragmentTransaction fragmentTransaction;
     public static String CAT_ID="";
 
     public CategoryListAdapter(List<ProductCategory> mDataset){
@@ -56,14 +61,20 @@ public class CategoryListAdapter extends RecyclerView.Adapter {
         ((ViewHolder)holder).textViewCategoryName.setText(mDataset.get(position).getName());
         ((ViewHolder)holder).textViewProductCategoryQuantity.setText(mDataset.get(position).getCount() + "");
         ((ViewHolder)holder).textViewProductCategoryDescription.setText(mDataset.get(position).getDescription());
-        Picasso.with(((ViewHolder) holder).imageViewProductCategoryImage.getContext())
+        Glide.with(((ViewHolder) holder).imageViewProductCategoryImage.getContext())
                 .load(mDataset.get(position).getImage()).into(((ViewHolder) holder).imageViewProductCategoryImage);
         ((ViewHolder)holder).linearLayoutProductCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent productScreen =  new Intent(v.getContext(),ProductListActivity.class);
-                productScreen.putExtra(CAT_ID, mDataset.get(position).getId()+"");
-                v.getContext().startActivity(productScreen);
+                fragmentManager = ((FragmentActivity)(v.getContext())).getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                FragmentProductList fragmentProductList = new FragmentProductList();
+                fragmentTransaction.replace(R.id.lnGlamShopping,fragmentProductList);
+                fragmentTransaction.commit();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("catName",mDataset.get(position).getName());
+                fragmentProductList.setArguments(bundle);
             }
         });
 

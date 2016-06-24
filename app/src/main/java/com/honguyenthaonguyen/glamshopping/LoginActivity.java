@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         imageButtonCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),SignInActivity.class);
+                Intent intent = new Intent(getApplicationContext(),RegisterActivity.class);
                 startActivity(intent);
             }
         });

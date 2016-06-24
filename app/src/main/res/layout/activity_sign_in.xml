@@ -3,22 +3,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.honguyenthaonguyen.glamshopping.SignInActivity">
 
 
-    <LinearLayout
+    <ViewFlipper
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/signinbackground"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout"></LinearLayout>
+        android:id="@+id/viewflipper">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/signinbackground"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/promobanner"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/poster1"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/poster2"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/poster3"/>
+
+        </RelativeLayout>
+
+
+    </ViewFlipper>
 
     <LinearLayout
         android:orientation="vertical"
@@ -33,21 +97,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:background="@drawable/email"
-                android:layout_marginTop="10dp"
-                android:id="@+id/imageView" />
+         View" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:ems="10"
                 android:id="@+id/editTextEmailAddress"
                 android:layout_weight="1"
-                android:text="Email Address" />
+                android:hint="Email Address"
+                android:drawableLeft="@drawable/email"/>
         </LinearLayout>
 
         <LinearLayout
@@ -57,20 +116,15 @@
             android:layout_marginBottom="2dp"
             >
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:background="@drawable/lock"
-                android:layout_marginTop="10dp"
-                android:id="@+id/imageView2" />
+
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:ems="10"
                 android:id="@+id/editTextEmailPassword"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/lock"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -91,14 +145,16 @@
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
-            <ImageButton
+            <Button
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/loginbutton"
-                android:id="@+id/imageButtonLogin" />
+                android:id="@+id/imageButtonLogin"
+                android:text="Sign in"
+                android:onClick="login"
+                />
         </LinearLayout>
 
         <LinearLayout
